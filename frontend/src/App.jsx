@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ViewSlots from "./ViewSlots";
+import ViewBookings from "./ViewBookings";
 
 function App() {
   const [memberId, setMemberId] = useState("");
@@ -106,6 +107,8 @@ function App() {
 
       <p>{message}</p>
        <ViewSlots />
+       <hr />
+       <ViewBookings />
     </div>
   );
 }
