@@ -158,14 +158,14 @@ def create_booking(member_id: int, facility_id: int, date: str, start_time: str)
         booking_id = cursor.fetchone()[0]
         connection.commit()
         logging.info(f"Booking created successfully: booking_id={booking_id}")
-    except IntegrityError:
+    except IntegrityError as e:
         connection.rollback()
-        logger.warning(f"Booking failed: slot {start_time} on {date} is already booked")
+        logger.exception("Database integrity error: %s", e)
         raise HTTPException(
             status_code=400,
-            detail="This slot is already booked!"
+            detail="Database error. Check backend terminal."
         )
-    
+        
     cursor.close()
     connection.close()
 
